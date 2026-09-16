@@ -1,0 +1,40 @@
+CREATE TABLE Domain (
+    DomainId INT PRIMARY KEY,
+    Name VARCHAR(50),
+    UId VARCHAR(50),
+    DisplayName VARCHAR(100),
+    TimeZoneId VARCHAR(100),
+    CultureCode VARCHAR(20)
+);
+
+CREATE TABLE Organization (
+    OrganizationId INT PRIMARY KEY,
+    LegalId VARCHAR(50),
+    LegalName VARCHAR(50),
+    OrgId VARCHAR(20),
+    OrgTypeEnum INT,
+    AdministrativeId VARCHAR(50),
+    IsActive BOOLEAN,
+    Address VARCHAR(255),
+    Email VARCHAR(100),
+    Phone VARCHAR(50),
+    VisualIdentity VARCHAR(50),
+    LogoPictureUId VARCHAR(50),
+    Url VARCHAR(255),
+    DateLastUpdate TIMESTAMP,
+    EthnicTypeEnum INT,
+    ReportHeaderFirstLine VARCHAR(100),
+    ReportHeaderSecondLine VARCHAR(100)
+);
+
+CREATE TABLE OrgHierarchy (
+    OrgHierarchyId INT PRIMARY KEY,
+    ParentOrganizationId INT,
+    ChildOrganizationId INT,
+
+    FOREIGN KEY (ParentOrganizationId)
+        REFERENCES Organization(OrganizationId),
+
+    FOREIGN KEY (ChildOrganizationId)
+        REFERENCES Organization(OrganizationId)
+);
