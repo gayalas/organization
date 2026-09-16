@@ -1,0 +1,12 @@
+C:\repositories\OrganizationApi\OrganizationApi.Domain\bin\Debug\net10.0\OrganizationApi.Domain.deps.json
+C:\repositories\OrganizationApi\OrganizationApi.Domain\bin\Debug\net10.0\OrganizationApi.Domain.dll
+C:\repositories\OrganizationApi\OrganizationApi.Domain\bin\Debug\net10.0\OrganizationApi.Domain.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.AssemblyInfoInputs.cache
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.AssemblyInfo.cs
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.csproj.CoreCompileInputs.cache
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.sourcelink.json
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.dll
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\refint\OrganizationApi.Domain.dll
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\OrganizationApi.Domain.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Domain\obj\Debug\net10.0\ref\OrganizationApi.Domain.dll

@@ -1,11 +1,38 @@
+using Microsoft.EntityFrameworkCore;
+using OrganizationApi.Application.Interfaces;
+using OrganizationApi.Application.Services;
+using OrganizationApi.Infraestructure.Data;
+using OrganizationApi.Infraestructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<OrganizationDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IDomainRepository, DomainRepository>();
+builder.Services.AddScoped<IDomainService, DomainService>();
+
+
+
+// builder.Services.AddSingleton(
+//     new PostgresConnectionFactory(connectionString!)
+// );
 
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//THIS CODE IS FOR test the connection
+// using var connection = new PostgresConnectionFactory(connectionString!)
+//     .CreateConnection();
+
+// await connection.OpenAsync();
+
+// Console.WriteLine("PostgreSQL connection successful!");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

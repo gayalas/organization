@@ -35,3 +35,14 @@ C:\repositories\OrganizationApi\OrganizationApi.Api\obj\Debug\net10.0\ref\Organi
 C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Application.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Domain.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Infraestructure.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Application.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Infraestructure.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\OrganizationApi.Domain.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Npgsql.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\repositories\OrganizationApi\OrganizationApi.Api\bin\Debug\net10.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
