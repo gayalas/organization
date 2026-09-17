@@ -20,8 +20,4 @@ public class DomainRepository : IDomainRepository
             .ToListAsync();
     }
 
-    Task<List<Domains>> IDomainRepository.GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
 }

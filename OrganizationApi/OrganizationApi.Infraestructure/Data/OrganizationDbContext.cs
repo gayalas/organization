@@ -16,27 +16,27 @@ public class OrganizationDbContext : DbContext
     {
         modelBuilder.Entity<Domains>(entity =>
         {
-            entity.ToTable("Domain", "core");
+            entity.ToTable("domain", "core");
 
             entity.HasKey(d => d.DomainId);
 
             entity.Property(d => d.DomainId)
-                .HasColumnName("DomainId");
+                .HasColumnName("domainid");
 
             entity.Property(d => d.Name)
-                .HasColumnName("Name");
+                .HasColumnName("name");
 
             entity.Property(d => d.UId)
-                .HasColumnName("UId");
+                .HasColumnName("uid");
 
             entity.Property(d => d.DisplayName)
-                .HasColumnName("DisplayName");
+                .HasColumnName("displayname");
 
             entity.Property(d => d.TimeZoneId)
-                .HasColumnName("TimeZoneId");
+                .HasColumnName("timezoneid");
 
             entity.Property(d => d.CultureCode)
-                .HasColumnName("CultureCode");
+                .HasColumnName("culturecode");
         });
     }
 }

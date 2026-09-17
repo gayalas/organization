@@ -6,6 +6,8 @@ using OrganizationApi.Infraestructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<OrganizationDbContext>(options =>
@@ -25,6 +27,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+
 
 //THIS CODE IS FOR test the connection
 // using var connection = new PostgresConnectionFactory(connectionString!)
@@ -64,6 +68,8 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapControllers();
 
 app.Run();
 
