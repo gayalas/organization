@@ -10,66 +10,33 @@ public class OrganizationDbContext : DbContext
     {
     }
 
-    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Domains> Domains { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Organization>(entity =>
+        modelBuilder.Entity<Domains>(entity =>
         {
-            entity.ToTable("Organization");
+            entity.ToTable("domain", "core");
 
-            entity.HasKey(o => o.OrganizationId);
+            entity.HasKey(d => d.DomainId);
 
-            entity.Property(o => o.OrganizationId)
-                .HasColumnName("OrganizationId");
+            entity.Property(d => d.DomainId)
+                .HasColumnName("domainid");
 
-            entity.Property(o => o.LegalId)
-                .HasColumnName("LegalId");
+            entity.Property(d => d.Name)
+                .HasColumnName("name");
 
-            entity.Property(o => o.LegalName)
-                .HasColumnName("LegalName");
+            entity.Property(d => d.UId)
+                .HasColumnName("uid");
 
-            entity.Property(o => o.OrgId)
-                .HasColumnName("OrgId");
+            entity.Property(d => d.DisplayName)
+                .HasColumnName("displayname");
 
-            entity.Property(o => o.OrgTypeEnum)
-                .HasColumnName("OrgTypeEnum");
+            entity.Property(d => d.TimeZoneId)
+                .HasColumnName("timezoneid");
 
-            entity.Property(o => o.AdministrativeId)
-                .HasColumnName("AdministrativeId");
-
-            entity.Property(o => o.IsActive)
-                .HasColumnName("IsActive");
-
-            entity.Property(o => o.Address)
-                .HasColumnName("Address");
-
-            entity.Property(o => o.Email)
-                .HasColumnName("Email");
-
-            entity.Property(o => o.Phone)
-                .HasColumnName("Phone");
-
-            entity.Property(o => o.VisualIdentity)
-                .HasColumnName("VisualIdentity");
-
-            entity.Property(o => o.LogoPictureUId)
-                .HasColumnName("LogoPictureUId");
-
-            entity.Property(o => o.Url)
-                .HasColumnName("Url");
-
-            entity.Property(o => o.DateLastUpdate)
-                .HasColumnName("DateLastUpdate");
-
-            entity.Property(o => o.EthnicTypeEnum)
-                .HasColumnName("EthnicTypeEnum");
-
-            entity.Property(o => o.ReportHeaderFirstLine)
-                .HasColumnName("ReportHeaderFirstLine");
-
-            entity.Property(o => o.ReportHeaderSecondLine)
-                .HasColumnName("ReportHeaderSecondLine");
+            entity.Property(d => d.CultureCode)
+                .HasColumnName("culturecode");
         });
     }
 }

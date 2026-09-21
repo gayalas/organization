@@ -13,20 +13,71 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<OrganizationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
-builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IDomainRepository, DomainRepository>();
+builder.Services.AddScoped<IDomainService, DomainService>();
 
+
+
+// builder.Services.AddSingleton(
+//     new PostgresConnectionFactory(connectionString!)
+// );
+
+// Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+
+//THIS CODE IS FOR test the connection
+// using var connection = new PostgresConnectionFactory(connectionString!)
+//     .CreateConnection();
+
+// await connection.OpenAsync();
+
+// Console.WriteLine("PostgreSQL connection successful!");
+
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Disable HTTPS redirection for local HTTP testing.
+// app.UseHttpsRedirection();
+
+var summaries = new[]
+{
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+    "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast = Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+
+    return forecast;
+})
+.WithName("GetWeatherForecast");
+
 app.MapControllers();
 
 app.Run();
+
+record WeatherForecast(
+    DateOnly Date,
+    int TemperatureC,
+    string? Summary)
+{
+    public int TemperatureF =>
+        32 + (int)(TemperatureC / 0.5556);
+}
