@@ -22,4 +22,16 @@ public class DomainController : ControllerBase
 
         return Ok(domains);
     }
+    [HttpPut("{uId}")]
+    public async Task<ActionResult<Domains?>> UpdateByUId(string uId, [FromBody] Domains domain)
+    {
+        var updatedDomain = await _service.UpdateByUIdAsync(uId, domain);
+
+        if (updatedDomain == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(updatedDomain);
+    }
 }

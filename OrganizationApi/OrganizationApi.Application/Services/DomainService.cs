@@ -16,4 +16,9 @@ public class DomainService : IDomainService
     {
         return await _repository.GetAllAsync();
     }
+
+    public async Task<Domains?> UpdateByUIdAsync(string uId, Domains domain)
+    {
+        return await _repository.UpdateByUIdAsync(uId, domain);
+    }
 }
