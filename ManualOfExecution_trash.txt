@@ -1,0 +1,263 @@
+======================== PROCESS TO CONTINOUS REPLICATION ================================
+
+STEP "1" GET ALL THE REQUIRED INFORMATION
+
+EXCECUTE THIS COMANDS
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "SELECT version();"
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "SHOW data_directory;"
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "SHOW port;"
+
+STEP "2" =================================
+WE WILL GET THIS INFORMATION FOR EXAMPLE
+DB1
+PostgreSQL 17.11
+Port: 5432
+Data: C:\Program Files\PostgreSQL\17\data
+
+
+WE WILL CREATE THE SECOND POSTGRESQL INSTANCE
+Create DB2's PostgreSQL instance
+C:\PostgreSQL-Lab\DB2
+Port 5433
+
+DB1                         DB2
+5432                        5433
+  │                           │
+  │    replication            │
+  └──────────────────────────►│
+
+
+STEP "3"
+
+EXECUTE THIS COMANDS
+New-Item -ItemType Directory -Path "C:\PostgreSQL-Lab\DB2" -Force
+& "C:\Program Files\PostgreSQL\17\bin\initdb.exe" -D "C:\PostgreSQL-Lab\DB2" -U postgres -A scram-sha-256
+
+
+=============================create a password file =======================
+
+"YOUR_PASSWORD" | Set-Content "C:\PostgreSQL-Lab\db2-password.txt"
+
+initialize db2
+& "C:\Program Files\PostgreSQL\17\bin\initdb.exe" `
+    -D "C:\PostgreSQL-Lab\DB2" `
+    -U postgres `
+    -A scram-sha-256 `
+    --pwfile="C:\PostgreSQL-Lab\db2-password.txt" 
+=============================create a password file =======================
+
+Remove-Item "C:\PostgreSQL-Lab\db2-password.txt"
+
+"1844" | Set-Content "C:\PostgreSQL-Lab\db2-password.txt"
+
+be sure with this if the password is empty
+Remove-Item "C:\PostgreSQL-Lab\DB2\*" -Recurse -Force
+Then verify that the folder is empty:
+Get-ChildItem "C:\PostgreSQL-Lab\DB2"
+
+
+& "C:\Program Files\PostgreSQL\17\bin\initdb.exe" `
+    -D "C:\PostgreSQL-Lab\DB2" `
+    -U postgres `
+    -A scram-sha-256 `
+    --pwfile="C:\PostgreSQL-Lab\db2-password.txt"
+
+
+clean db2 
+STEP 2 — Configure DB2 to use port 5433
+First, delete the temporary password file if you haven't already:
+Remove-Item "C:\PostgreSQL-Lab\db2-password.txt"
+Now open DB2's configuration:
+notepad "C:\PostgreSQL-Lab\DB2\postgresql.conf"
+Find this line:
+#port = 5432
+Change it to:
+port = 5433
+Also find:
+#listen_addresses = 'localhost'
+Change it to:
+listen_addresses = 'localhost'
+Save and close Notepad.
+
+STEP 3 — Start DB2
+
+& "C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" `
+    -D "C:\PostgreSQL-Lab\DB2" `
+    -l "C:\PostgreSQL-Lab\DB2\db2.log" `
+    start
+STEP 3.1 — Verify DB2 is listening on 5433
+Run:
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" `
+    -U postgres `
+    -p 5433 `
+    -c "SELECT version();"
+
+STEP 4 — Configure DB1 for replication
+4.1 Open DB1's postgresql.conf
+Run:
+notepad "C:\Program Files\PostgreSQL\17\data\postgresql.conf"
+Find:
+#wal_level = replica
+Change it to:
+wal_level = replica
+Then find:
+#max_wal_senders = 10
+Change it to:
+max_wal_senders = 10
+Save the file.
+Why these settings?
+wal_level = replica tells PostgreSQL to generate the WAL information needed for replication.
+max_wal_senders = 10 allows DB1 to have replication connections sending WAL to standby servers.
+
+
+
+
+
+4.2 Configure DB1's pg_hba.conf
+Open:
+notepad "C:\Program Files\PostgreSQL\17\data\pg_hba.conf"
+Go to the bottom of the file and add:
+host    replication    replicator    127.0.0.1/32    scram-sha-256
+This means:
+DB1
+ │
+ │ user = replicator
+ │ database = replication
+ │ localhost
+ ▼
+DB2
+
+
+
+
+
+
+Paso 2 — Crear replicator en DB1
+En PowerShell ejecuta:
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -p 5432
+
+1844
+
+
+Paso 2 — Crear replicator en DB1
+En PowerShell ejecuta:
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -p 5432
+Deberías entrar a algo como:
+psql (17.11)
+Type "help" for help.
+
+postgres=#
+Primero verifica si el usuario ya existe:
+SELECT rolname, rolreplication, rolcanlogin
+FROM pg_roles
+WHERE rolname = 'replicator';
+Si NO aparece ninguna fila
+Ejecuta:
+CREATE ROLE replicator WITH REPLICATION LOGIN;
+Luego establece su contraseña sin escribirla en el comando:
+\password replicator
+Te pedirá:
+Enter new password for user "replicator":
+Enter it again:
+Después verifica:
+SELECT rolname, rolreplication, rolcanlogin
+FROM pg_roles
+WHERE rolname = 'replicator';
+Esperamos:
+ rolname   | rolreplication | rolcanlogin
+-----------+----------------+-------------
+ replicator| t              | t
+Finalmente:
+\q
+
+Paso 3 — Identificar el servicio de PostgreSQL 17
+Ejecuta en PowerShell:
+Get-Service *postgres*
+Deberías ver algo parecido a:
+Status   Name                 DisplayName
+------   ----                 -----------
+Running  postgresql-x64-17    postgresql-x64-17
+
+
+Paso 5 — Preparar DB2 para recibir la copia de DB1
+Ahora vamos a eliminar el contenido actual de:
+C:\PostgreSQL-Lab\DB2
+Esto no afecta DB1. Solamente estamos eliminando la instancia independiente que creamos anteriormente, porque pg_basebackup va a reemplazarla por una copia física de DB1.
+Ejecuta:
+Remove-Item "C:\PostgreSQL-Lab\DB2\*" -Recurse -Force
+
+
+Paso 7 — Configurar el puerto de DB2
+Abre:
+notepad "C:\PostgreSQL-Lab\DB2\postgresql.conf"
+Busca:
+#port = 5432
+o:
+port = 5432
+y déjalo exactamente como:
+port = 5433
+También verifica que:
+listen_addresses = 'localhost'
+
+
+Paso 7.1 — Verificar standby.signal
+Ejecuta:
+Test-Path "C:\PostgreSQL-Lab\DB2\standby.signal"
+Esperamos:
+True
+Luego verifica la configuración que -R agregó:
+Select-String `
+    -Path "C:\PostgreSQL-Lab\DB2\postgresql.auto.conf" `
+    -Pattern "primary_conninfo"
+Deberías obtener una línea que contiene algo parecido a:
+primary_conninfo = 'user=replicator ... host=127.0.0.1 port=5432 ...'
+No me envíes la línea completa si contiene la contraseña. Puedes enviarme solamente el resultado del primer comando (True) y decirme si el segundo encontró primary_conninfo.
+Después arrancaremos DB2 como standby.
+
+Paso 8 — Arrancar DB2
+Ejecuta:
+& "C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" `
+    -D "C:\PostgreSQL-Lab\DB2" `
+    -l "C:\PostgreSQL-Lab\DB2\db2.log" `
+    start
+Esperamos:
+waiting for server to start.... done
+server started
+
+Primero verificaremos que DB2 realmente esté funcionando como standby/recovery.
+Ejecuta:
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" `
+    -U postgres `
+    -p 5433 `
+    -c "SELECT pg_is_in_recovery();"
+El resultado correcto es:
+ pg_is_in_recovery
+-------------------
+ t
+(1 row)
+
+
+
+
+conectarse a la db para probar
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" `
+    -U postgres `
+    -p 5432 `
+    -d OrganizationDB
+
+
+
+for start the server
+
+
+& "C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" `
+    -D "C:\PostgreSQL-Lab\DB2" `
+    -l "C:\PostgreSQL-Lab\DB2\db2.log" `
+    start
+
+conectarse a la db
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" `
+    -U postgres `
+    -h localhost `
+    -p 5433 `
+    -d OrganizationDB
