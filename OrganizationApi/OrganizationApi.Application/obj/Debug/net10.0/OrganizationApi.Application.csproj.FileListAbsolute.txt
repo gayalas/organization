@@ -1,0 +1,16 @@
+C:\repositories\OrganizationApi\OrganizationApi.Application\bin\Debug\net10.0\OrganizationApi.Application.deps.json
+C:\repositories\OrganizationApi\OrganizationApi.Application\bin\Debug\net10.0\OrganizationApi.Application.dll
+C:\repositories\OrganizationApi\OrganizationApi.Application\bin\Debug\net10.0\OrganizationApi.Application.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Application\bin\Debug\net10.0\OrganizationApi.Domain.dll
+C:\repositories\OrganizationApi\OrganizationApi.Application\bin\Debug\net10.0\OrganizationApi.Domain.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.csproj.AssemblyReference.cache
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.AssemblyInfoInputs.cache
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.AssemblyInfo.cs
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.csproj.CoreCompileInputs.cache
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.sourcelink.json
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\Organiza.927D062F.Up2Date
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.dll
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\refint\OrganizationApi.Application.dll
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\OrganizationApi.Application.pdb
+C:\repositories\OrganizationApi\OrganizationApi.Application\obj\Debug\net10.0\ref\OrganizationApi.Application.dll

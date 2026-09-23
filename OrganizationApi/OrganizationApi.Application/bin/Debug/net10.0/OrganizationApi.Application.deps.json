@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "OrganizationApi.Application/1.0.0": {
+        "dependencies": {
+          "OrganizationApi.Domain": "1.0.0"
+        },
+        "runtime": {
+          "OrganizationApi.Application.dll": {}
+        }
+      },
+      "OrganizationApi.Domain/1.0.0": {
+        "runtime": {
+          "OrganizationApi.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "OrganizationApi.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "OrganizationApi.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
